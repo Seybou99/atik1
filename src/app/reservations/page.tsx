@@ -37,7 +37,12 @@ const ReservationsPage = async () => {
   return (
     <ClientOnly>
       <TripsClient
-        reservations={reservations}
+        reservations={reservations.map(reservation => ({
+          ...reservation,
+          startDate: new Date(reservation.startDate),
+          endDate: new Date(reservation.endDate),
+          createdAt: reservation.createdAt
+        }))}
         currentUser={currentUser}
       />
     </ClientOnly>

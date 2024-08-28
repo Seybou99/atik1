@@ -6,7 +6,7 @@ import getReservations from "@/app/actions/getReservations";
 import getReservationHistory from "@/app/actions/getReservationHistory"; // Importe la fonction pour récupérer l'historique des réservations
 
 import HistorysClient from "./HistorysClient"; // Importe le composant pour afficher l'historique des réservations
-import TripsClient from "../trips/TripsClient";
+import TripsClient from "../../../trips/TripsClient";
 
 const ReservationsPage = async () => {
   const currentUser = await getCurrentUser();
@@ -50,11 +50,7 @@ const ReservationsPage = async () => {
                 ...reservation,
                 startDate: new Date(reservation.startDate),
                 endDate: new Date(reservation.endDate),
-                createdAt: reservation.createdAt.toString(),
-                listing: {
-                  ...reservation.listing,
-                  createdAt: reservation.listing.createdAt.toString()
-                }
+                createdAt: reservation.createdAt.toString()
               }))}
               currentUser={currentUser}
             />
@@ -65,15 +61,11 @@ const ReservationsPage = async () => {
           <div>
             <h2 className="text-2xl font-bold mb-4 text-center">Historique des réservations</h2>
             <HistorysClient
-              reservations={reservationHistory.map(reservation => ({
+              reservations={reservations.map(reservation => ({
                 ...reservation,
                 startDate: new Date(reservation.startDate),
                 endDate: new Date(reservation.endDate),
-                createdAt: reservation.createdAt.toString(),
-                listing: {
-                  ...reservation.listing,
-                  createdAt: reservation.listing.createdAt.toString()
-                }
+                createdAt: reservation.createdAt.toString()
               }))}
               currentUser={currentUser}
             />
@@ -82,6 +74,5 @@ const ReservationsPage = async () => {
       </div>
     </ClientOnly>
   );
-}
- 
+} 
 export default ReservationsPage;

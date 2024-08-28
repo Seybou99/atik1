@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import axios from 'axios';
-import { SafeUser } from '@/app/types';
+import { SafeComment, SafeUser } from '@/app/types';
 import Avatar from '@/app/components/Avatar';
 import Button from '@/app/components/Button';
 
@@ -10,7 +10,8 @@ interface CommentSectionProps {
   listingId: string;
   currentUser?: SafeUser | null;
   comments: Comment[];
-  setComments: React.Dispatch<React.SetStateAction<Comment[]>>;
+  // setComments: React.Dispatch<React.SetStateAction<Comment[]>>;
+  setComments: React.Dispatch<React.SetStateAction<SafeComment[]>>;
 }
 
 interface Comment {

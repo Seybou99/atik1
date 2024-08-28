@@ -73,7 +73,12 @@ const ReservationsClient: React.FC<ReservationsClientProps> = ({
           <ListingCard
             key={reservation.id}
             data={reservation.listing}
-            reservation={reservation}
+            reservation={{
+              ...reservation,
+              startDate: new Date(reservation.startDate),
+              endDate: new Date(reservation.endDate),
+              createdAt: new Date(reservation.createdAt)
+            }}
             actionId={reservation.id}
             onAction={onCancel}
             disabled={deletingId === reservation.id}

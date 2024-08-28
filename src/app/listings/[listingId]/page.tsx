@@ -14,7 +14,6 @@ interface IParams {
 }
 
 const ListingPage = async ({ params }: { params: IParams }) => {
-
   const listing = await getListingById(params);
   const reservations = await getReservations(params);
   const currentUser = await getCurrentUser();
@@ -31,11 +30,15 @@ const ListingPage = async ({ params }: { params: IParams }) => {
     <ClientOnly>
       <ListingClient
         listing={listing}
-        reservations={reservations}
+        reservations={reservations.map(reservation => ({
+          ...reservation,
+          startDate: new Date(reservation.startDate),
+          endDate: new Date(reservation.endDate),
+          createdAt: reservation.createdAt
+        }))}
         currentUser={currentUser}
       />
     </ClientOnly>
   );
 }
- 
 export default ListingPage;
