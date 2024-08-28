@@ -46,7 +46,16 @@ const ReservationsPage = async () => {
           <div>
             <h2 className="text-2xl font-bold mb-4 text-center">Réservations actuelles</h2>
             <TripsClient
-              reservations={reservations}
+              reservations={reservations.map(reservation => ({
+                ...reservation,
+                startDate: new Date(reservation.startDate),
+                endDate: new Date(reservation.endDate),
+                createdAt: reservation.createdAt.toString(),
+                listing: {
+                  ...reservation.listing,
+                  createdAt: reservation.listing.createdAt.toString()
+                }
+              }))}
               currentUser={currentUser}
             />
           </div>
@@ -56,7 +65,16 @@ const ReservationsPage = async () => {
           <div>
             <h2 className="text-2xl font-bold mb-4 text-center">Historique des réservations</h2>
             <HistorysClient
-              reservations={reservationHistory}
+              reservations={reservationHistory.map(reservation => ({
+                ...reservation,
+                startDate: new Date(reservation.startDate),
+                endDate: new Date(reservation.endDate),
+                createdAt: reservation.createdAt.toString(),
+                listing: {
+                  ...reservation.listing,
+                  createdAt: reservation.listing.createdAt.toString()
+                }
+              }))}
               currentUser={currentUser}
             />
           </div>
